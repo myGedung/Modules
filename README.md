@@ -4,6 +4,8 @@ mygedung/modules is a laravel package which created to manage your large laravel
 
 This package is a re-published, re-organised and maintained version of pingpong/modules, which isn't maintained anymore.
 
+[![Build Status](https://travis-ci.org/myGedung/Modules.svg?branch=master)](https://travis-ci.org/myGedung/Modules)
+
 ## **Quick Example**
 
 Generate your first module using php artisan module:make Blog. The following structure will be generated.
