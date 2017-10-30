@@ -1,24 +1,28 @@
+# Required to run your project under the correct environment.
 language: php
 
+# Versions of PHP you want your project run with.
 php:
   - 7.0
   - 7.1
   - 7.2
 
-cache:
-  directories:
-    - $HOME/.composer/cache
-
+# Commands to be run before your environment runs.
 before_script:
-  - travis_retry composer update --no-interaction --prefer-dist
+  - composer self-update
+  - composer install --prefer-source --no-interaction --dev
 
-script:
-  - if [ $(phpenv version-name) == "7.1" ]; then vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover; else vendor/bin/phpunit; fi
+# Commands you want to run that will verify your build.
+script: phpunit
 
-after_script:
-  - if [ $(phpenv version-name) == "7.1" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-  - if [ $(phpenv version-name) == "7.1" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
-
+# allow_failures: Allow this build to fail under the specified environments.
+# fast_finish: If your build fails do not continue trying to build, just stop.
 matrix:
   allow_failures:
-  - php: 7.2
+    - php: 7.2
+  fast_finish: true
+
+# Customize when the notification emails are sent.
+notifications:
+    on_success: never
+    on_failure: never
